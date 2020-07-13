@@ -429,7 +429,7 @@ func (sp *ServiceProvider) ParseXmlResponse(decodedResponseXml []byte, possibleR
 		return nil, retErr
 	}
 	if resp.Destination != sp.AcsURL.String() {
-		retErr.PrivateErr = fmt.Errorf("`Destination` does not match AcsURL (expected %q)", sp.AcsURL.String())
+		retErr.PrivateErr = fmt.Errorf("`Destination` does not match AcsURL (expected %q) (recieved %q", sp.AcsURL.String(), resp.Destination)
 		return nil, retErr
 	}
 
@@ -453,7 +453,7 @@ func (sp *ServiceProvider) ParseXmlResponse(decodedResponseXml []byte, possibleR
 		return nil, retErr
 	}
 	if resp.Issuer.Value != sp.IDPMetadata.EntityID {
-		retErr.PrivateErr = fmt.Errorf("Issuer does not match the IDP metadata (expected %q) (recieved %q)", sp.IDPMetadata.EntityID, resp.Issuer.Value)
+		retErr.PrivateErr = fmt.Errorf("Issuer does not match the IDP metadata (expected %q) (recieved EntityID %q)", sp.IDPMetadata.EntityID, resp.Issuer.Value)
 		return nil, retErr
 	}
 	if resp.Status.StatusCode.Value != StatusSuccess {
