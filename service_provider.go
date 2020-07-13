@@ -453,7 +453,7 @@ func (sp *ServiceProvider) ParseXmlResponse(decodedResponseXml []byte, possibleR
 		return nil, retErr
 	}
 	if resp.Issuer.Value != sp.IDPMetadata.EntityID {
-		retErr.PrivateErr = fmt.Errorf("Issuer does not match the IDP metadata (expected %q)", sp.IDPMetadata.EntityID)
+		retErr.PrivateErr = fmt.Errorf("Issuer does not match the IDP metadata (expected %q) (recieved %q)", sp.IDPMetadata.EntityID, resp.Issuer.Value)
 		return nil, retErr
 	}
 	if resp.Status.StatusCode.Value != StatusSuccess {
