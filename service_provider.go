@@ -84,6 +84,9 @@ type ServiceProvider struct {
 
 	// AllowIdpInitiated
 	AllowIDPInitiated bool
+
+	// SP Entity ID
+	EntityID string
 }
 
 // MaxIssueDelay is the longest allowed time between when a SAML assertion is
@@ -575,6 +578,9 @@ func (sp *ServiceProvider) validateAssertion(assertion *Assertion, possibleReque
 	audienceRestrictionsValid := len(assertion.Conditions.AudienceRestrictions) == 0
 	for _, audienceRestriction := range assertion.Conditions.AudienceRestrictions {
 		if audienceRestriction.Audience.Value == sp.MetadataURL.String() {
+			audienceRestrictionsValid = true
+		}
+		if audienceRestriction.Audience.Value == sp.EntityID {
 			audienceRestrictionsValid = true
 		}
 	}

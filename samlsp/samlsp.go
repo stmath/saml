@@ -33,6 +33,7 @@ type Options struct {
 	CookieDomain      string
 	CookieSecure      bool
 	ForceAuthn        bool
+	EntityID          string
 }
 
 // New creates a new Middleware
@@ -61,6 +62,7 @@ func New(opts Options) (*Middleware, error) {
 			IDPMetadata:       opts.IDPMetadata,
 			ForceAuthn:        &opts.ForceAuthn,
 			AllowIDPInitiated: opts.AllowIDPInitiated,
+			EntityID: opts.EntityID,
 		},
 		AllowIDPInitiated: opts.AllowIDPInitiated,
 		TokenMaxAge:       tokenMaxAge,
